@@ -25,5 +25,5 @@ eureka:
     service-url:
       defaultZone: http://localhost:7001/eureka,http://localhost:7002/eureka #集群版
   instance:
-    instance-id: paymentClien
+    instance-id: UserClien
     prefer-ip-address: true

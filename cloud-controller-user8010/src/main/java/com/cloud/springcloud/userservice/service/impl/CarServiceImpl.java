@@ -13,6 +13,7 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,12 +35,19 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements CarSe
 
     /**
      * 保存
+     * integer 查询出车牌号是否存在
      * @param car 传入信息
      * @return
      */
     @Override
     public boolean saveCar(Car car) {
-        return false;
+        car.setCRegist(new Date());
+        QueryWrapper<Car> wrapper = new QueryWrapper();
+        wrapper.eq("C_NUM",car.getCNum());
+        Integer integer = carMapper.selectCount(wrapper);
+        if (integer!=0) {return false;}
+        int insert = carMapper.insert(car);
+        if (insert==1) {return true;}else {return false;}
     }
 
     /**
@@ -131,9 +139,9 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements CarSe
     public CommonResult updateForId(Car car) {
         int i = carMapper.updateById(car);
         if (i != 1){
-            return new CommonResult<Page<Car>>(400,"更新失败");
+            return new CommonResult(400,"更新失败");
         }
-        return new CommonResult<Page<Car>>(200,"更新成功");
+        return new CommonResult(200,"更新成功");
     }
 
     /**
@@ -158,7 +166,7 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements CarSe
     @Override
     public CommonResult deleteForArryId(List<Integer> ids) {
         int i = carMapper.deleteBatchIds(ids);
-        if (i != 1){
+        if (i == 0){
             return new CommonResult<Page<Car>>(400,"删除失败");
         }
         return new CommonResult<Page<Car>>(200,"删除成功");
