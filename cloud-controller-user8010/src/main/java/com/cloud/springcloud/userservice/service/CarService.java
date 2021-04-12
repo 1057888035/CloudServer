@@ -1,5 +1,6 @@
 package com.cloud.springcloud.userservice.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
 import com.cloud.springcloud.userservice.entity.Car;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -26,7 +27,7 @@ public interface CarService extends IService<Car> {
        * 获取所有车辆信息
        * @return
        */
-      CommonResult<List<Car>> getCar();
+      CommonResult<Page<Car>> getCar();
 
       /**
        * 根据车牌号获取车辆信息

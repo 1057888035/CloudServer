@@ -1,6 +1,7 @@
 package com.cloud.springcloud.userservice.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
 import com.cloud.springcloud.userservice.entity.Car;
 import com.cloud.springcloud.userservice.service.CarService;
@@ -29,15 +30,13 @@ public class CarController {
     CarService carService;
 
     @GetMapping(value = "/getAllCar" ,name = "查询所有登记车辆")
-    public CommonResult<List<Car>> getAllCar(){
+    public CommonResult<Page<Car>> getAllCar(){
         return carService.getCar();
-
     }
 
-    @GetMapping(value = "/getAllCar/{cnum}" ,name = "根据车牌号查询登记车辆")
+    @GetMapping(value = "/getCarForNum/{cnum}" ,name = "根据车牌号查询登记车辆")
     public CommonResult<List<Car>> getCarForNum(@PathVariable("cnum") String cNum ){
         return carService.getCarForNum(cNum);
-
     }
 
 }
