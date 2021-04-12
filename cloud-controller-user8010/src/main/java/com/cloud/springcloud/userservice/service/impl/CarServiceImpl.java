@@ -8,6 +8,8 @@ import com.cloud.springcloud.userservice.entity.Car;
 import com.cloud.springcloud.userservice.mapper.CarMapper;
 import com.cloud.springcloud.userservice.service.CarService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.swagger.models.auth.In;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,14 +32,27 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements CarSe
     @Autowired(required = false)
     CarMapper carMapper;
 
-
+    /**
+     * 保存
+     * @param car 传入信息
+     * @return
+     */
     @Override
-    public CommonResult<Page<Car>> getCar() {
+    public boolean saveCar(Car car) {
+        return false;
+    }
+
+    /**
+     * 查询
+     * @param pn
+     * @return
+     */
+    @Override
+    public CommonResult<Page<Car>> getCar(Integer pn) {
 
         QueryWrapper<Car> wrapper = new QueryWrapper();
-        wrapper.select();
 
-        Page<Car> page = new Page<>(1,2);
+        Page<Car> page = new Page<>(pn,10);
 
         Page<Car> mapIPage = carMapper.selectPage(page,wrapper);
 
@@ -47,44 +62,107 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements CarSe
         return new CommonResult<Page<Car>>(200,"success",mapIPage);
     }
 
+    /**
+     * 查询
+     * @param pn
+     * @return
+     */
     @Override
-    public CommonResult<List<Car>> getCarForNum(String cNum) {
-        HashMap map = new HashMap<>();
-        map.put("C_NUM",cNum);
-        List<Car> byMap = carMapper.selectByMap(map);
-        if (byMap ==null || byMap.isEmpty()){
-            return new CommonResult<List<Car>>(400,"数据为空");
+    public CommonResult<Page<Car>> getCarForNum(String cNum,Integer pn) {
+        QueryWrapper<Car> wrapper = new QueryWrapper();
+        wrapper.eq("C_NUM",cNum);
+
+        Page<Car> page = new Page<>(pn,10);
+
+        Page<Car> mapIPage = carMapper.selectPage(page,wrapper);
+
+        if (mapIPage == null){
+            return new CommonResult<Page<Car>>(400,"没有数据");
         }
-            return new CommonResult<List<Car>>(200,"success",byMap);
+        return new CommonResult<Page<Car>>(200,"success",mapIPage);
     }
 
+    /**
+     * 查询
+     * @param pn
+     * @return
+     */
     @Override
-    public CommonResult<List<Car>> getCarForName(String cName) {
-        return null;
+    public CommonResult<Page<Car>> getCarForName(String cName, Integer pn) {
+        QueryWrapper<Car> wrapper = new QueryWrapper();
+        wrapper.eq("C_NAME",cName);
+
+        Page<Car> page = new Page<>(pn,10);
+
+        Page<Car> mapIPage = carMapper.selectPage(page,wrapper);
+
+        if (mapIPage == null){
+            return new CommonResult<Page<Car>>(400,"没有数据");
+        }
+        return new CommonResult<Page<Car>>(200,"success",mapIPage);
     }
 
+    /**
+     * 查询
+     * @param pn
+     * @return
+     */
     @Override
-    public CommonResult<List<Car>> getCarForPhone(String phone) {
-        return null;
+    public CommonResult<Page<Car>> getCarForPhone(String phone, Integer pn) {
+        QueryWrapper<Car> wrapper = new QueryWrapper();
+        wrapper.eq("C_PHONE",phone);
+
+        Page<Car> page = new Page<>(pn,10);
+
+        Page<Car> mapIPage = carMapper.selectPage(page,wrapper);
+
+        if (mapIPage == null){
+            return new CommonResult<Page<Car>>(400,"没有数据");
+        }
+        return new CommonResult<Page<Car>>(200,"success",mapIPage);
     }
 
-    @Override
-    public boolean saveCar(Car car) {
-        return false;
-    }
-
-    @Override
-    public CommonResult deleteForId(int id) {
-        return null;
-    }
-
+    /**
+     * 根据id更新车辆信息
+     * @param car
+     * @return
+     */
     @Override
     public CommonResult updateForId(Car car) {
-        return null;
+        int i = carMapper.updateById(car);
+        if (i != 1){
+            return new CommonResult<Page<Car>>(400,"更新失败");
+        }
+        return new CommonResult<Page<Car>>(200,"更新成功");
     }
 
+    /**
+     * 根据id删除单个车辆信息
+     * @param id
+     * @return
+     */
     @Override
-    public CommonResult deleteForArryId(List<Integer> id) {
-        return null;
+    public CommonResult deleteForId(int id) {
+        int i = carMapper.deleteById(id);
+        if (i != 1){
+            return new CommonResult<Page<Car>>(400,"删除失败");
+        }
+        return new CommonResult<Page<Car>>(200,"删除成功");
     }
+
+    /**
+     * 根据id删除多个车辆信息
+     * @param ids
+     * @return
+     */
+    @Override
+    public CommonResult deleteForArryId(List<Integer> ids) {
+        int i = carMapper.deleteBatchIds(ids);
+        if (i != 1){
+            return new CommonResult<Page<Car>>(400,"删除失败");
+        }
+        return new CommonResult<Page<Car>>(200,"删除成功");
+    }
+
+
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
 import com.cloud.springcloud.userservice.entity.Car;
 import com.baomidou.mybatisplus.extension.service.IService;
+import io.swagger.models.auth.In;
 
 import java.util.List;
 
@@ -27,28 +28,28 @@ public interface CarService extends IService<Car> {
        * 获取所有车辆信息
        * @return
        */
-      CommonResult<Page<Car>> getCar();
+      CommonResult<Page<Car>> getCar(Integer pn);
 
       /**
        * 根据车牌号获取车辆信息
        * @param cNum
        * @return
        */
-      CommonResult<List<Car>> getCarForNum(String cNum);
+      CommonResult<Page<Car>> getCarForNum(String cNum,Integer pn);
 
       /**
        * 根据业主名查询车辆信息
        * @param cName
        * @return   一个业主对应多个车辆
        */
-      CommonResult<List<Car>> getCarForName(String cName);
+      CommonResult<Page<Car>> getCarForName(String cName,Integer pn);
 
       /**
        * 根据手机号查询车辆信息
        * @param phone
        * @return   一个手机号对应多个车辆
        */
-      CommonResult<List<Car>> getCarForPhone(String phone);
+      CommonResult<Page<Car>> getCarForPhone(String phone,Integer pn);
 
       /**
        * 根据id更新车辆信息
@@ -66,8 +67,8 @@ public interface CarService extends IService<Car> {
 
       /**
        * 批量删除车辆信息
-       * @param id
+       * @param ids
        * @return
        */
-      CommonResult deleteForArryId(List<Integer> id);
+      CommonResult deleteForArryId(List<Integer> ids);
 }
