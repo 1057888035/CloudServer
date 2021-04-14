@@ -26,11 +26,13 @@ public interface StaffService extends IService<Staff> {
 
     CommonResult<Page<Staff>> getStaffForPhone(String phone);
 
-    CommonResult updateForId(Owner owner);
+    CommonResult updateForId(Staff staff);
 
     CommonResult deleteForId(int id);
 
     CommonResult deleteForArryId(List<Integer> ids);
 
-    Owner loginin(String username,String password);
+    Staff loginin(String username,String password);
+
+    Integer userHave(String phone,String password);
 }
