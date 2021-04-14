@@ -149,9 +149,9 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements CarSe
     public CommonResult deleteForId(int id) {
         int i = carMapper.deleteById(id);
         if (i != 1){
-            return new CommonResult<Page<Car>>(400,"删除失败");
+            return new CommonResult(400,"删除失败");
         }
-        return new CommonResult<Page<Car>>(200,"删除成功");
+        return new CommonResult(200,"删除成功");
     }
 
     /**
@@ -163,9 +163,9 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements CarSe
     public CommonResult deleteForArryId(List<Integer> ids) {
         int i = carMapper.deleteBatchIds(ids);
         if (i == 0){
-            return new CommonResult<Page<Car>>(400,"删除失败");
+            return new CommonResult(400,"删除失败");
         }
-        return new CommonResult<Page<Car>>(200,"删除成功");
+        return new CommonResult(200,"删除成功");
     }
 
 
