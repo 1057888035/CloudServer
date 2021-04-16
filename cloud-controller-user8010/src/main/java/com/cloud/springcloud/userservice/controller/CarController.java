@@ -40,7 +40,7 @@ public class CarController {
     }
 
         @GetMapping(value = "/getAllCar/{pn}" ,name = "查询所有登记车辆")
-    public CommonResult<Page<Car>> getAllCar(@RequestParam(value = "pn" ,defaultValue = "1")Integer pn){
+    public CommonResult<Page<Car>> getAllCar(@PathVariable("pn")Integer pn){
         return carService.getCar(pn);
     }
 

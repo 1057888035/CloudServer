@@ -29,12 +29,12 @@ public class InstockController {
 
 
     @GetMapping(value = "/getAll/{pn}",name = "获取所有物料信息")
-    public CommonResult<Page<Instock>> getAll(@RequestParam(value = "pn",defaultValue = "1") int pn){
+    public CommonResult<Page<Instock>> getAll(@PathVariable("pn") int pn){
                 return  instockService.getInstock(pn);
     }
 
     @GetMapping(value = "/getForName/{name}/{pn}",name = "根据名称获取所有物料信息")
-    public CommonResult<Page<Instock>> getForName(@PathVariable(value = "name") String name, @RequestParam(value = "pn",defaultValue = "1") int pn){
+    public CommonResult<Page<Instock>> getForName(@PathVariable(value = "name") String name, @PathVariable("pn") int pn){
         return  instockService.getBuildingForName(name,pn);
     }
 

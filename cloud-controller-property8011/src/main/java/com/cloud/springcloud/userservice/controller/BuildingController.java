@@ -37,7 +37,7 @@ public class BuildingController {
 
 
     @GetMapping(value = "/getBuilding/{pn}" ,name = "查询所有房间")
-    public CommonResult<Page<Building>> getBuilding(@RequestParam(value = "pn" ,defaultValue = "1")Integer pn){
+    public CommonResult<Page<Building>> getBuilding(@PathVariable("pn")Integer pn){
         return buildingService.getBuilding(pn);
     }
 

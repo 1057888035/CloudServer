@@ -1,6 +1,7 @@
 package com.cloud.springcloud.userservice.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
 import com.cloud.springcloud.userservice.entity.Parking;
@@ -8,11 +9,7 @@ import com.cloud.springcloud.userservice.entity.Transfer;
 import com.cloud.springcloud.userservice.service.TransferService;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -39,8 +36,8 @@ public class TransferController {
         return new CommonResult(200,"success",transferService.updateById(transfer));
     }
 
-    @GetMapping(value = "/getAll/{pn}" ,name = "审核调库申请")
-    public CommonResult<Page<Transfer>> getAll(@RequestParam(value = "pn",defaultValue = "1") Integer pn){
+    @GetMapping(value = "/getAll/{pn}" ,name = "查看调库申请")
+    public CommonResult<IPage<Transfer>> getAll(@PathVariable("pn") Integer pn){
         Page<Transfer> page = new Page<>(pn,10);
        return  transferService.getAll(pn);
     }

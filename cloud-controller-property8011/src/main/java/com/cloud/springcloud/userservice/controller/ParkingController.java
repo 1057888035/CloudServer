@@ -24,21 +24,21 @@ public class ParkingController {
     ParkingService parkingService;
 
     @GetMapping(value = "/getAll/{pn}" ,name = "获取所有车位信息")
-    public CommonResult<Page<Parking>> getAll(@RequestParam(value = "pn",defaultValue = "1") Integer pn){
+    public CommonResult<Page<Parking>> getAll(@PathVariable("pn") Integer pn){
         return parkingService.getParking(pn);
     }
 
-    @GetMapping(value = "/getParkingById/{id}" ,name = "获取所有车位信息")
+    @GetMapping(value = "/getParkingById/{id}" ,name = "根据id获取车位信息")
     public CommonResult<Page<Parking>> getParkingById(@PathVariable("id") Integer id){
         return parkingService.getParkingById(id);
     }
 
-    @GetMapping(value = "/getParkingByNum/{num}" ,name = "获取所有车位信息")
+    @GetMapping(value = "/getParkingByNum/{num}" ,name = "根据车牌号获取车位信息")
     public CommonResult<Page<Parking>> getParkingByNum(@PathVariable("num") String num){
         return parkingService.getParkingByNum(num);
     }
 
-    @GetMapping(value = "/updateById" ,name = "获取所有车位信息")
+    @GetMapping(value = "/updateById" ,name = "根据id跟新车位信息")
     public CommonResult getParkingByNum(Parking parking){
         return new CommonResult(200,"success",parkingService.updateById(parking));
     }

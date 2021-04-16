@@ -58,7 +58,7 @@ public class StaffController {
     }
 
     @GetMapping(value = "/getAllStaff/{pn}", name = "查询所有员工")
-    public CommonResult<Page<Staff>> getAllStaff(@RequestParam(value = "pn", defaultValue = "1") Integer pn) {
+    public CommonResult<Page<Staff>> getAllStaff(@PathVariable("pn") Integer pn) {
         return staffService.getStaff(pn);
     }
 

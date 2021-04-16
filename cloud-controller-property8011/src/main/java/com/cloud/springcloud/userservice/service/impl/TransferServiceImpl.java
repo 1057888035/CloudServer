@@ -1,6 +1,7 @@
 package com.cloud.springcloud.userservice.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
 import com.cloud.springcloud.userservice.entity.Parking;
@@ -27,16 +28,16 @@ public class TransferServiceImpl extends ServiceImpl<TransferMapper, Transfer> i
    TransferMapper transferMapper;
 
     @Override
-    public CommonResult<Page<Transfer>> getAll(Integer pn) {
+    public CommonResult<IPage<Transfer>> getAll(Integer pn) {
         QueryWrapper<Transfer> wrapper = new QueryWrapper();
 
         Page<Transfer> page = new Page<>(pn,10);
 
-        Page<Transfer> mapIPage = transferMapper.selectPage(page,wrapper);
+        IPage<Transfer> mapIPage = transferMapper.selectPage(page, wrapper);
 
         if (mapIPage == null){
-            return new CommonResult<Page<Transfer>>(400,"没有数据");
+            return new CommonResult<IPage<Transfer>>(400,"没有数据");
         }
-        return new CommonResult<Page<Transfer>>(200,"success",mapIPage);
+        return new CommonResult<IPage<Transfer>>(200,"success",mapIPage);
     }
 }

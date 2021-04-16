@@ -63,7 +63,7 @@ public class OwnerController {
     }
 
     @GetMapping(value = "/getAllOwner/{pn}", name = "查询所有业主")
-    public CommonResult<Page<Owner>> getAllOwner(@RequestParam(value = "pn", defaultValue = "1") Integer pn) {
+    public CommonResult<Page<Owner>> getAllOwner(@PathVariable("pn") Integer pn) {
         return ownerService.getOwner(pn);
     }
 
