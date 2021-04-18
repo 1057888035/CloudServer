@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
-@MapperScan("com.cloud.springcloud.userservice.mapper")
+@MapperScan("com.cloud.springcloud.Chargeservice.mapper")
 @SpringBootApplication
 @EnableEurekaClient
 @EnableDiscoveryClient
