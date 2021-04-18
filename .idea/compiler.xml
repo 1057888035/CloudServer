@@ -13,6 +13,7 @@
         <module name="cloud-provider-payment8004" />
         <module name="cloud-consumer-order8088" />
         <module name="cloud-provider-payment8001" />
+        <module name="cloud-controller-property8011" />
         <module name="cloud-controller-user8010" />
         <module name="cloud-provider-payment8002" />
       </profile>
