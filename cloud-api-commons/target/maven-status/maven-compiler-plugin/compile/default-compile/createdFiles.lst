@@ -1,2 +1,3 @@
-com\cloud\springcloud\entities\Payment.class
+com\cloud\springcloud\entities\DateUtilss.class
+com\cloud\springcloud\entities\AlipayConfig.class
 com\cloud\springcloud\entities\CommonResult.class
