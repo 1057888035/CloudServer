@@ -19,6 +19,7 @@
       <module>cloud-provider-payment8004</module>
       <module>cloud-controller-user8010</module>
       <module>cloud-controller-property8011</module>
+      <module>cloud-controller-charge8012</module>
   </modules>
 
 
