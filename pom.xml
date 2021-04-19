@@ -15,12 +15,11 @@
       <module>cloud-api-commons</module>
     <module>cloud-eureka-server7001</module>
       <module>cloud-eureka-server7002</module>
-      <module>cloud-provider-payment8002</module>
-      <module>cloud-provider-payment8004</module>
       <module>cloud-controller-user8010</module>
       <module>cloud-controller-property8011</module>
       <module>cloud-controller-charge8012</module>
       <module>cloud-controller-service8013</module>
+    <module>cloud-controller-config8014</module>
   </modules>
 
 

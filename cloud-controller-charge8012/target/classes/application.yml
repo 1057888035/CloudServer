@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: cloud-controller-property
+    name: cloud-controller-charge
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver

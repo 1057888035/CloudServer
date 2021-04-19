@@ -1,9 +1,9 @@
 server:
-  port: 8013
+  port: 8014
 
 spring:
   application:
-    name: cloud-controller-service
+    name: cloud-controller-config
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -25,5 +25,5 @@ eureka:
     service-url:
       defaultZone: http://localhost:7001/eureka,http://localhost:7002/eureka #集群版
   instance:
-    instance-id: ServiceClien
+    instance-id: ConfigClien
     prefer-ip-address: true

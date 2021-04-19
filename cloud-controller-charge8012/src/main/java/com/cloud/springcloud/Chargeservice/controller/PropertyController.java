@@ -57,8 +57,8 @@ public class PropertyController {
      * @param property
      * @return
      */
-    @GetMapping(value = "/save",name = "保存物业费用信息")
-    public CommonResult getall(Property property){
+    @GetMapping(value = "/savepro",name = "保存物业费用信息")
+    public CommonResult savePro(Property property){
         property.setPrGmt(new Date());
         boolean save = propertyService.save(property);
         if (save){
