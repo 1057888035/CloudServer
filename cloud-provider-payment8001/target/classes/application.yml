@@ -4,18 +4,6 @@ server:
 spring:
   application:
     name: cloud-payment-service
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://47.93.234.153:3306/bootpojo?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: root
-    password: w.19971214
-
-
-
-mybatis:
-  mapperLocations: classpath:mapper/*.xml
-  type-aliases-package: com.cloud.springcloud.entities
 
 
 eureka:

@@ -7,6 +7,7 @@ import com.cloud.springcloud.Chargeservice.service.DockService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cloud.springcloud.entities.CommonResult;
 import com.cloud.springcloud.entities.DateUtilss;
+import com.cloud.springcloud.entities.PayOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.unit.DataUnit;
@@ -60,7 +61,15 @@ public class DockServiceImpl extends ServiceImpl<DockMapper, Dock> implements Do
                 docker.setDoMoney(bigDecimal);
                 System.out.println(docker.toString());
                  i = dockMapper.updateById(docker);
-                template.postForObject(PAYMENT_URL + "/payment/create", docker, CommonResult.class);
+                 //跳转到停车收费页面
+                PayOrder payOrder = new PayOrder();
+                payOrder.setOut_trade_no(docker.getDoId()+"");
+                payOrder.setBody("车辆:"+docker.getDoNum()+"的停车费用");
+                payOrder.setSubject("停车收费");
+                payOrder.setTotal_amount(bigDecimal+"");
+                payOrder.setProduct_code(""+docker.getDoId()+bigDecimal);
+                String s = template.postForObject(PAYMENT_URL + "/payment/create", docker, String.class);
+                return new CommonResult(200,"success",s);
             }
         }
         return new CommonResult(400,"错误");
