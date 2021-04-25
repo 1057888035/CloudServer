@@ -3,15 +3,11 @@ package com.cloud.springcloud.configservice.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cloud.springcloud.configservice.entity.Adver;
+import com.cloud.springcloud.entities.entity.Adver;
 import com.cloud.springcloud.configservice.service.AdverService;
 import com.cloud.springcloud.entities.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +37,8 @@ public class AdverController {
     }
 
 
-    @GetMapping(value = "/save",name = "保存广告")
-    public CommonResult saveAdver(Adver adver){
+    @PostMapping(value = "/save",name = "保存广告")
+    public CommonResult saveAdver(@RequestBody Adver adver){
         boolean save = adverService.save(adver);
         if (save){
             return new CommonResult(200,"success");
@@ -54,7 +50,7 @@ public class AdverController {
 
 
     @GetMapping(value = "/delete/{ids}",name = "删除广告")
-    public CommonResult saveAdver(String ids){
+    public CommonResult deleteAdver(String ids){
         if (ids.contains("-")){
             //批量删除
             List<Integer> del_ids =new ArrayList<>();
@@ -72,8 +68,8 @@ public class AdverController {
 
     }
 
-    @GetMapping(value = "/update",name = "跟新广告")
-    public CommonResult updateAdver(Adver adver){
+    @PostMapping(value = "/update",name = "跟新广告")
+    public CommonResult updateAdver(@RequestBody Adver adver){
         boolean b = adverService.updateById(adver);
         if (b){
             return new CommonResult(200,"success");

@@ -2,8 +2,7 @@ package com.cloud.springcloud.userservice.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
-import com.cloud.springcloud.userservice.entity.Instock;
-import com.cloud.springcloud.userservice.entity.Parking;
+import com.cloud.springcloud.entities.entity.Parking;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

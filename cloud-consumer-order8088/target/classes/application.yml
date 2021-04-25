@@ -11,10 +11,6 @@ spring:
     username: root
     password: w.19971214
 
-mybatis:
-  mapperLocations: classpath:mapper/*.xml
-  type-aliases-package: com.cloud.springcloud.entities
-
 
 eureka:
   client:

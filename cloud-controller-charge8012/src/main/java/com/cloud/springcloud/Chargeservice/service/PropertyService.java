@@ -1,6 +1,6 @@
 package com.cloud.springcloud.Chargeservice.service;
 
-import com.cloud.springcloud.Chargeservice.entity.Property;
+import com.cloud.springcloud.entities.entity.Property;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

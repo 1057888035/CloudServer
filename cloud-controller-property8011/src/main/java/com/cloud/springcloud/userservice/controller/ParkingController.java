@@ -3,7 +3,7 @@ package com.cloud.springcloud.userservice.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
-import com.cloud.springcloud.userservice.entity.Parking;
+import com.cloud.springcloud.entities.entity.Parking;
 import com.cloud.springcloud.userservice.service.ParkingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +38,8 @@ public class ParkingController {
         return parkingService.getParkingByNum(num);
     }
 
-    @GetMapping(value = "/updateById" ,name = "根据id跟新车位信息")
-    public CommonResult getParkingByNum(Parking parking){
+    @PostMapping(value = "/updateById" ,name = "根据id跟新车位信息")
+    public CommonResult getParkingByNum(@RequestBody Parking parking){
         return new CommonResult(200,"success",parkingService.updateById(parking));
     }
 }

@@ -1,6 +1,6 @@
 package com.cloud.springcloud.service.mapper;
 
-import com.cloud.springcloud.service.entity.Complaint;
+import com.cloud.springcloud.entities.entity.Complaint;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

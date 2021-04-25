@@ -1,6 +1,6 @@
 package com.cloud.springcloud.service.service.impl;
 
-import com.cloud.springcloud.service.entity.Complaint;
+import com.cloud.springcloud.entities.entity.Complaint;
 import com.cloud.springcloud.service.mapper.ComplaintMapper;
 import com.cloud.springcloud.service.service.ComplaintService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

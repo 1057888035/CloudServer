@@ -3,16 +3,13 @@ package com.cloud.springcloud.userservice.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
-import com.cloud.springcloud.userservice.entity.Owner;
-import com.cloud.springcloud.userservice.mapper.OwnerMapper;
+import com.cloud.springcloud.entities.entity.Owner;
 import com.cloud.springcloud.userservice.service.OwnerService;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,8 +49,8 @@ public class OwnerController {
 
     }
 
-    @GetMapping(value = "/save", name = "保存业主")
-    public CommonResult save(Owner owner) {
+    @PostMapping(value = "/save", name = "保存业主")
+    public CommonResult save(@RequestBody Owner owner) {
         boolean b = ownerService.save(owner);
         if (b) {
             return new CommonResult(200, "success");
@@ -79,8 +76,8 @@ public class OwnerController {
     }
 
 
-    @GetMapping(value = "/updateForId", name = "根据id修改业主")
-    public CommonResult<Page<Owner>> updateForId(Owner owner) {
+    @PostMapping(value = "/updateForId", name = "根据id修改业主")
+    public CommonResult<Page<Owner>> updateForId(@RequestBody Owner owner) {
         return ownerService.updateForId(owner);
     }
 

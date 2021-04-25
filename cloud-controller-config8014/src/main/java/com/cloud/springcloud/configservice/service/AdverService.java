@@ -1,6 +1,6 @@
 package com.cloud.springcloud.configservice.service;
 
-import com.cloud.springcloud.configservice.entity.Adver;
+import com.cloud.springcloud.entities.entity.Adver;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

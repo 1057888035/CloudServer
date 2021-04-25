@@ -1,4 +1,4 @@
-package com.cloud.springcloud.Chargeservice.entity;
+package com.cloud.springcloud.entities.entity;
 
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 用水信息
+ * 用气信息
  * </p>
  *
  * @author wangcheng
@@ -22,31 +22,31 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("t_water")
-@ApiModel(value="Water对象", description="用水信息")
-public class Water implements Serializable {
+@TableName("t_gas")
+@ApiModel(value="Gas对象", description="用气信息")
+public class Gas implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用水序列id")
-    @TableId(value = "W_ID", type = IdType.AUTO)
-    private Integer wId;
+    @TableId(value = "G_ID", type = IdType.AUTO)
+    private Integer gId;
 
     @ApiModelProperty(value = "房间id")
-    @TableField("W_BU_ID")
-    private Integer wBuId;
+    @TableField("G_BU_ID")
+    private Integer gBuId;
 
     @ApiModelProperty(value = "抄表时间")
-    @TableField("W_GMT")
-    private Date wGmt;
+    @TableField("G_GMT")
+    private Date gGmt;
 
     @ApiModelProperty(value = "本月抄表数值")
-    @TableField("W_NUM")
-    private BigDecimal wNum;
+    @TableField("G_NUM")
+    private BigDecimal gNum;
 
     @ApiModelProperty(value = "本月应缴费用")
-    @TableField("W_MONEY")
-    private BigDecimal wMoney;
+    @TableField("G_MONEY")
+    private BigDecimal gMoney;
 
 
 }

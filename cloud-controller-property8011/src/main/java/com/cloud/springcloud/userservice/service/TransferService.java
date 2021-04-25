@@ -1,9 +1,8 @@
 package com.cloud.springcloud.userservice.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
-import com.cloud.springcloud.userservice.entity.Transfer;
+import com.cloud.springcloud.entities.entity.Transfer;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

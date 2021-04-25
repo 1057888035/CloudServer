@@ -3,15 +3,16 @@ package com.cloud.springcloud.userservice.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
-import com.cloud.springcloud.userservice.entity.Owner;
-import com.cloud.springcloud.userservice.entity.Staff;
+import com.cloud.springcloud.entities.entity.Staff;
 import com.cloud.springcloud.userservice.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -32,14 +33,14 @@ public class StaffController {
      * 员工登录
      *
      * @param request
-     * @param phone
-     * @param password
      * @return
      */
     @PostMapping(value = "/login", name = "员工登录")
-    public CommonResult login(HttpServletRequest request, String phone, String password) {
-        Staff loginin = staffService.loginin(phone, password);
-        if (loginin != null) {
+    public CommonResult login(HttpServletRequest request,HttpServletResponse response,@RequestBody Map<String,String> params) {
+        String username = params.get("username").toString();
+        String password = params.get("password").toString();
+        Staff loginin = staffService.loginin(username, password);
+        if (loginin != null &&loginin.getSType()==1) {
             request.getSession().setAttribute("login", loginin);
             return new CommonResult(200, "登录成功");
         }
@@ -47,8 +48,8 @@ public class StaffController {
 
     }
 
-    @GetMapping(value = "/save", name = "保存员工")
-    public CommonResult save(Staff staff) {
+    @PostMapping(value = "/save", name = "保存员工")
+    public CommonResult save(@RequestBody Staff staff) {
         boolean b = staffService.save(staff);
         if (b) {
             return new CommonResult(200, "success");
@@ -74,8 +75,8 @@ public class StaffController {
     }
 
 
-    @GetMapping(value = "/updateForId", name = "根据id修改员工")
-    public CommonResult<Page<Staff>> updateForId(Staff staff) {
+    @PostMapping(value = "/updateForId", name = "根据id修改员工")
+    public CommonResult<Page<Staff>> updateForId(@RequestBody Staff staff) {
         return staffService.updateForId(staff);
     }
 

@@ -3,20 +3,14 @@ package com.cloud.springcloud.Chargeservice.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cloud.springcloud.Chargeservice.entity.Gas;
+import com.cloud.springcloud.entities.entity.Gas;
 import com.cloud.springcloud.Chargeservice.service.GasService;
 import com.cloud.springcloud.entities.CommonResult;
-import io.swagger.models.Swagger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <p>
@@ -74,8 +68,8 @@ public class GasController {
      * @param gas
      * @return
      */
-    @GetMapping(value = "/pay",name = "手动操作缴费")
-    public CommonResult payForHuman(Gas gas){
+    @PostMapping(value = "/pay",name = "手动操作缴费")
+    public CommonResult payForHuman(@RequestBody Gas gas){
         gas.setGMoney(new BigDecimal(0));
         boolean update = gasService.updateById(gas);
         if (update){

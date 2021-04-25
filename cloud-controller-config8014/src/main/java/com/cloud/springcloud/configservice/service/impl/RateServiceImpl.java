@@ -1,6 +1,6 @@
 package com.cloud.springcloud.configservice.service.impl;
 
-import com.cloud.springcloud.configservice.entity.Rate;
+import com.cloud.springcloud.entities.entity.Rate;
 import com.cloud.springcloud.configservice.mapper.RateMapper;
 import com.cloud.springcloud.configservice.service.RateService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

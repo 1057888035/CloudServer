@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <option name="USE_RELEASE_OPTION" value="false" />
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
@@ -10,17 +11,15 @@
         <module name="cloud-eureka-server7002" />
         <module name="cloud-api-commons" />
         <module name="cloud-eureka-server7001" />
-        <module name="cloud-provider-payment8004" />
         <module name="cloud-consumer-order8088" />
         <module name="cloud-provider-payment8001" />
         <module name="cloud-controller-property8011" />
         <module name="cloud-controller-user8010" />
+        <module name="cloud-controller-service8013" />
         <module name="cloud-controller-charge8012" />
-        <module name="cloud-provider-payment8002" />
+        <module name="cloud-controller-config8014" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="11">
-      <module name="cloud-consumer-index8089" target="11" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="11" />
   </component>
 </project>

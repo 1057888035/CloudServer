@@ -1,18 +1,14 @@
 package com.cloud.springcloud.Chargeservice.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.cloud.springcloud.Chargeservice.entity.Dock;
-import com.cloud.springcloud.Chargeservice.entity.Gas;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cloud.springcloud.entities.entity.Dock;
 import com.cloud.springcloud.Chargeservice.service.DockService;
 import com.cloud.springcloud.entities.CommonResult;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
-
-import java.sql.Wrapper;
 import java.util.Date;
 
 /**
@@ -60,13 +56,23 @@ public class DockController {
     }
 
 
+
+    @GetMapping(value = "/getAllDocke/{pn}",name = "查询所有")
+    public CommonResult getAll(@PathVariable("pn")Integer pn){
+        Page page=new Page(pn,10);
+        Page page1 = dockService.page(page);
+        return new CommonResult(200,"success",page1);
+    }
+
+
+
     /**
      * 手动操作缴费
      * @param dock
      * @return
      */
-    @GetMapping(value = "/updateforRoot",name = "缴费")
-    public CommonResult update(Dock dock){
+    @PostMapping(value = "/updateforRoot",name = "缴费")
+    public CommonResult update(@RequestBody Dock dock){
         dock.setDoState(1);
         boolean b = dockService.updateById(dock);
         return new CommonResult(200,"success",b);

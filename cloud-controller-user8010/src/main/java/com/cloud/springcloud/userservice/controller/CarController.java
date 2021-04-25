@@ -3,15 +3,12 @@ package com.cloud.springcloud.userservice.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
-import com.cloud.springcloud.entities.DateUtilss;
-import com.cloud.springcloud.userservice.entity.Car;
+import com.cloud.springcloud.entities.entity.Car;
 import com.cloud.springcloud.userservice.service.CarService;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,8 +26,13 @@ public class CarController {
     @Autowired
     CarService carService;
 
-    @GetMapping(value = "/savecar" ,name = "新增车辆信息")
-    public CommonResult saveCar(Car car){
+    @GetMapping(value = "/savecar/{cNum}/{cName}/{cPhone}" ,name = "新增车辆信息")
+    public CommonResult saveCar(@PathVariable("cNum")String cNum,@PathVariable("cName")String cName,@PathVariable("cPhone")String cPhone){
+        Car car= new Car();
+        car.setCNum(cNum);
+        car.setCName(cName);
+        car.setCPhone(cPhone);
+        System.out.println(car.toString());
         boolean b = carService.saveCar(car);
         if (b){
           return new CommonResult(200,"success");
@@ -59,8 +61,9 @@ public class CarController {
         return carService.getCarForPhone(phone,pn);
     }
 
-    @GetMapping(value = "/updateforid" ,name = "根据id跟新")
-    public CommonResult updateForId(Car car){
+    @PostMapping(value = "/updateforid" ,name = "根据id跟新")
+    public CommonResult updateForId(@RequestBody Car car){
+        System.out.println(car.toString());
         return carService.updateForId(car);
     }
 

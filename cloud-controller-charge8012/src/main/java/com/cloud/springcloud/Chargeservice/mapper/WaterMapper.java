@@ -1,6 +1,6 @@
 package com.cloud.springcloud.Chargeservice.mapper;
 
-import com.cloud.springcloud.Chargeservice.entity.Water;
+import com.cloud.springcloud.entities.entity.Water;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

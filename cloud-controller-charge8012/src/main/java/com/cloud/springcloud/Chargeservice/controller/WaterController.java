@@ -3,17 +3,11 @@ package com.cloud.springcloud.Chargeservice.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cloud.springcloud.Chargeservice.entity.Gas;
-import com.cloud.springcloud.Chargeservice.entity.Water;
-import com.cloud.springcloud.Chargeservice.service.GasService;
+import com.cloud.springcloud.entities.entity.Water;
 import com.cloud.springcloud.Chargeservice.service.WaterService;
 import com.cloud.springcloud.entities.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -73,8 +67,8 @@ public class WaterController {
      * @param water
      * @return
      */
-    @GetMapping(value = "/pay",name = "手动操作缴费")
-    public CommonResult payForHuman(Water water){
+    @PostMapping(value = "/pay",name = "手动操作缴费")
+    public CommonResult payForHuman(@RequestBody Water water){
         water.setWMoney(new BigDecimal(0));
         boolean update = waterService.updateById(water);
         if (update){

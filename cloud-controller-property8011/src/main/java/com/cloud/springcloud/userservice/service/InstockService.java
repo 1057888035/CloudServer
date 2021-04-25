@@ -2,10 +2,8 @@ package com.cloud.springcloud.userservice.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
-import com.cloud.springcloud.userservice.entity.Building;
-import com.cloud.springcloud.userservice.entity.Instock;
+import com.cloud.springcloud.entities.entity.Instock;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cloud.springcloud.userservice.mapper.InstockMapper;
 
 import java.util.List;
 

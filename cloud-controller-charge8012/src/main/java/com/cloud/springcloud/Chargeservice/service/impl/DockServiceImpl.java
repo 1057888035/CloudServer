@@ -1,7 +1,7 @@
 package com.cloud.springcloud.Chargeservice.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.cloud.springcloud.Chargeservice.entity.Dock;
+import com.cloud.springcloud.entities.entity.Dock;
 import com.cloud.springcloud.Chargeservice.mapper.DockMapper;
 import com.cloud.springcloud.Chargeservice.service.DockService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -10,10 +10,8 @@ import com.cloud.springcloud.entities.DateUtilss;
 import com.cloud.springcloud.entities.PayOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.unit.DataUnit;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +28,7 @@ import java.util.List;
 public class DockServiceImpl extends ServiceImpl<DockMapper, Dock> implements DockService {
 
     public static final String PAYMENT_URL = "http://CLOUD-PAYMENT-SERVICE";
-
+    public static final String CONFIG_URL = "http://CLOUD-CONTROLLER-CONFIG";
     @Autowired(required = false)
     DockMapper dockMapper;
 
@@ -56,8 +54,10 @@ public class DockServiceImpl extends ServiceImpl<DockMapper, Dock> implements Do
         for (Dock docker : docks) {
             if (docker.getGmtOut() == null) {
                 docker.setGmtOut(dock.getGmtOut());
+                BigDecimal object = template.getForObject(CONFIG_URL + "/configservice/rate/getRateByNamessss/停车费", BigDecimal.class);
                 //这里要计算费率并设置
-                BigDecimal bigDecimal = new BigDecimal(((((DateUtilss.dateTogether(docker.getGmtIn(), docker.getGmtOut())/1000)/60))/60)/*这里还要乘以费率，暂时没算*/);
+                BigDecimal bigDecimal = new BigDecimal(((((DateUtilss.dateTogether(docker.getGmtIn(), docker.getGmtOut())/1000)/60))/60));
+                bigDecimal=bigDecimal.multiply(object);
                 docker.setDoMoney(bigDecimal);
                 System.out.println(docker.toString());
                  i = dockMapper.updateById(docker);

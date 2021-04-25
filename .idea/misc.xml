@@ -8,6 +8,12 @@
         <option value="$PROJECT_DIR$/cloud-consumer-order8088/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/cloud-provider-payment8002/pom.xml" />
+        <option value="$PROJECT_DIR$/cloud-provider-payment8004/pom.xml" />
+      </set>
+    </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

@@ -6,8 +6,12 @@
     <file url="file://$PROJECT_DIR$/cloud-consumer-order8088/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-controller-charge8012/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-controller-charge8012/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-controller-config8014/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-controller-config8014/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-controller-property8011/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-controller-property8011/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-controller-service8013/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-controller-service8013/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-controller-user8010/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-controller-user8010/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-eureka-server7001/src/main/java" charset="UTF-8" />
@@ -16,9 +20,6 @@
     <file url="file://$PROJECT_DIR$/cloud-eureka-server7002/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-provider-payment8001/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-provider-payment8001/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/cloud-provider-payment8002/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/cloud-provider-payment8002/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/cloud-provider-payment8004/src/main/resources" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

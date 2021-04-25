@@ -3,7 +3,7 @@ package com.cloud.springcloud.userservice.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
-import com.cloud.springcloud.userservice.entity.Instock;
+import com.cloud.springcloud.entities.entity.Instock;
 import com.cloud.springcloud.userservice.service.InstockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -43,8 +43,8 @@ public class InstockController {
         return new CommonResult<>(200,"success", instockService.updateById(instock));
     }
 
-    @GetMapping(value = "/save",name = "新增物料信息")
-    public CommonResult save(Instock instock){
+    @PostMapping(value = "/save",name = "新增物料信息")
+    public CommonResult save(@RequestBody Instock instock){
         return new CommonResult<>(200,"success", instockService.save(instock));
     }
 

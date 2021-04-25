@@ -3,11 +3,9 @@ package com.cloud.springcloud.Chargeservice.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cloud.springcloud.Chargeservice.entity.Gas;
-import com.cloud.springcloud.Chargeservice.entity.Power;
+import com.cloud.springcloud.entities.entity.Power;
 import com.cloud.springcloud.Chargeservice.service.PowerService;
 import com.cloud.springcloud.entities.CommonResult;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

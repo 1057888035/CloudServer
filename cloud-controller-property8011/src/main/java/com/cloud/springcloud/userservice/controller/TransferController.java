@@ -4,10 +4,8 @@ package com.cloud.springcloud.userservice.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
-import com.cloud.springcloud.userservice.entity.Parking;
-import com.cloud.springcloud.userservice.entity.Transfer;
+import com.cloud.springcloud.entities.entity.Transfer;
 import com.cloud.springcloud.userservice.service.TransferService;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +29,8 @@ public class TransferController {
         return new CommonResult(200,"success",transferService.save(transfer));
     }
 
-    @GetMapping(value = "/update" ,name = "审核调库申请")
-    public CommonResult updatetransfer(Transfer transfer){
+    @PostMapping(value = "/update" ,name = "审核调库申请")
+    public CommonResult updatetransfer(@RequestBody Transfer transfer){
         return new CommonResult(200,"success",transferService.updateById(transfer));
     }
 

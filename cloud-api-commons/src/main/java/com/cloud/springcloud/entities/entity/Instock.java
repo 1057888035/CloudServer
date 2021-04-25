@@ -1,4 +1,4 @@
-package com.cloud.springcloud.userservice.entity;
+package com.cloud.springcloud.entities.entity;
 
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableName;

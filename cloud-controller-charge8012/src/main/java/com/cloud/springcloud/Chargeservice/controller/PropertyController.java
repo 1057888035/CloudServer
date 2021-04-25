@@ -3,19 +3,12 @@ package com.cloud.springcloud.Chargeservice.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cloud.springcloud.Chargeservice.entity.Power;
-import com.cloud.springcloud.Chargeservice.entity.Property;
-import com.cloud.springcloud.Chargeservice.service.PowerService;
+import com.cloud.springcloud.entities.entity.Property;
 import com.cloud.springcloud.Chargeservice.service.PropertyService;
 import com.cloud.springcloud.entities.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
-
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -73,8 +66,8 @@ public class PropertyController {
      * @param property
      * @return
      */
-    @GetMapping(value = "/save",name = "手动操作缴费")
-    public CommonResult payForHuman(Property property){
+    @PostMapping(value = "/save",name = "手动操作缴费")
+    public CommonResult payForHuman(@RequestBody Property property){
         property.setPrState(1);
         boolean update = propertyService.updateById(property);
         if (update){

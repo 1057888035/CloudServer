@@ -3,7 +3,7 @@ package com.cloud.springcloud.userservice.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
-import com.cloud.springcloud.userservice.entity.Car;
+import com.cloud.springcloud.entities.entity.Car;
 import com.cloud.springcloud.userservice.mapper.CarMapper;
 import com.cloud.springcloud.userservice.service.CarService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

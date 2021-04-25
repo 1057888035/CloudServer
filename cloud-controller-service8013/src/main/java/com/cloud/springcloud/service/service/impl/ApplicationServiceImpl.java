@@ -1,6 +1,6 @@
 package com.cloud.springcloud.service.service.impl;
 
-import com.cloud.springcloud.service.entity.Application;
+import com.cloud.springcloud.entities.entity.Application;
 import com.cloud.springcloud.service.mapper.ApplicationMapper;
 import com.cloud.springcloud.service.service.ApplicationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

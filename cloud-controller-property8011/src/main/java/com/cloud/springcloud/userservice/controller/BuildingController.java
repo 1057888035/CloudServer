@@ -3,7 +3,7 @@ package com.cloud.springcloud.userservice.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
-import com.cloud.springcloud.userservice.entity.Building;
+import com.cloud.springcloud.entities.entity.Building;
 import com.cloud.springcloud.userservice.service.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +25,8 @@ public class BuildingController {
     @Autowired
     BuildingService buildingService;
 
-    @GetMapping(value = "/saveBuilding" ,name = "新增房间信息")
-    public CommonResult saveBuilding(Building building){
+    @PostMapping(value = "/saveBuilding" ,name = "新增房间信息")
+    public CommonResult saveBuilding(@RequestBody Building building){
         boolean b = buildingService.saveBuilding(building);
         if (b){
             return new CommonResult(200,"success");
@@ -50,8 +50,8 @@ public class BuildingController {
         return buildingService.getBuildingForOwnerId(id);
     }
 
-    @GetMapping(value = "/updateforid" ,name = "根据id跟新")
-    public CommonResult updateForId(Building building){
+    @PostMapping(value = "/updateforid" ,name = "根据id跟新")
+    public CommonResult updateForId(@RequestBody Building building){
         return buildingService.updateForId(building);
     }
 

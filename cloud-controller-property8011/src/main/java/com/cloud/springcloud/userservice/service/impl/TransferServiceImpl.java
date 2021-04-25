@@ -4,12 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
-import com.cloud.springcloud.userservice.entity.Parking;
-import com.cloud.springcloud.userservice.entity.Transfer;
+import com.cloud.springcloud.entities.entity.Transfer;
 import com.cloud.springcloud.userservice.mapper.TransferMapper;
 import com.cloud.springcloud.userservice.service.TransferService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.cloud.springcloud.configservice.service.impl;
 
-import com.cloud.springcloud.configservice.entity.Fchannel;
+import com.cloud.springcloud.entities.entity.Fchannel;
 import com.cloud.springcloud.configservice.mapper.FchannelMapper;
 import com.cloud.springcloud.configservice.service.FchannelService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

@@ -1,6 +1,6 @@
 package com.cloud.springcloud.userservice.mapper;
 
-import com.cloud.springcloud.userservice.entity.Building;
+import com.cloud.springcloud.entities.entity.Building;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

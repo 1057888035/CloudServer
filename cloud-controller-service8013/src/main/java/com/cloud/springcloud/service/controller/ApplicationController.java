@@ -4,19 +4,14 @@ package com.cloud.springcloud.service.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
-import com.cloud.springcloud.service.entity.Application;
+import com.cloud.springcloud.entities.entity.Application;
 import com.cloud.springcloud.service.service.ApplicationService;
-import com.cloud.springcloud.userservice.entity.Staff;
+import com.cloud.springcloud.entities.entity.Staff;
 import com.cloud.springcloud.userservice.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -51,6 +46,7 @@ public class ApplicationController {
         }
     }
 
+
     @GetMapping(value = "/getAll/{pn}" ,name = "查询所有申请并逆序")
     public CommonResult<Page<Application>> getAll(@PathVariable("pn")Integer pn){
         Page<Application> page = new Page<>(pn,10);
@@ -72,8 +68,8 @@ public class ApplicationController {
     }
 
 
-    @GetMapping(value = "/arrgment" ,name = "安排员工")
-    public CommonResult getAll(Application application){
+    @PostMapping(value = "/arrgment" ,name = "安排员工")
+    public CommonResult arrgment(@RequestBody Application application){
         QueryWrapper<Application> wrapper = new QueryWrapper();
         boolean updateById = applicationService.updateById(application);
         if (updateById){
