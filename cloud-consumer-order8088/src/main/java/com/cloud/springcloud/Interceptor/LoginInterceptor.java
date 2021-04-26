@@ -28,10 +28,8 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
         if (token != null){
-            System.out.println("进来了");
             String username = JwtUtils.getUserNameByToken(request);
             String password = staffService.getPasswordForPhone(username);
-            System.out.println("获取的password"+password);
             boolean result = JwtUtils.verify(token,username,password);
             if(result){
                 System.out.println("通过拦截器");

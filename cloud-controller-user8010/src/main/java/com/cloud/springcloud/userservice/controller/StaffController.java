@@ -3,6 +3,7 @@ package com.cloud.springcloud.userservice.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
+import com.cloud.springcloud.entities.HashScripty;
 import com.cloud.springcloud.entities.JwtUtils;
 import com.cloud.springcloud.entities.entity.Staff;
 import com.cloud.springcloud.userservice.service.StaffService;
@@ -36,6 +37,8 @@ public class StaffController {
     @PostMapping(value = "/login/{username}/{password}", name = "员工登录")
     public CommonResult login(@PathVariable("username")String username,@PathVariable("password")String password) {
         HashMap<Object, Object> hashStaff = new HashMap<>();
+        //对密码进行hash256加密
+        password=HashScripty.SHA256(password);
         Staff loginin = staffService.loginin(username, password);
         if (loginin != null &&loginin.getSType()==0) {
             String token = JwtUtils.sign(username,password);
@@ -48,6 +51,7 @@ public class StaffController {
 
     @PostMapping(value = "/save", name = "保存员工")
     public CommonResult save(@RequestBody Staff staff) {
+        staff.setSPassword(HashScripty.SHA256(staff.getSPassword()));
         boolean b = staffService.save(staff);
         if (b) {
             return new CommonResult(200, "success");
