@@ -129,4 +129,11 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
         Integer integer = staffMapper.selectCount(wrapper);
         return integer;
     }
+
+    @Override
+    public String getPasswordForPhone(String phone) {
+        QueryWrapper<Staff> wrapper = new QueryWrapper();
+        wrapper.eq("S_PHONE",phone);
+        return staffMapper.selectOne(wrapper).getSPassword();
+    }
 }

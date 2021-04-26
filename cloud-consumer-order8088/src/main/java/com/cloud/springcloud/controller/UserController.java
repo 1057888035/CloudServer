@@ -7,11 +7,10 @@ import com.cloud.springcloud.entities.entity.Staff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
 
 
 @RestController
@@ -123,6 +122,15 @@ public class UserController {
     public CommonResult deleteStaffForId(@PathVariable("ids") String ids){
         return  template.getForObject(USER_URL+"/userservice/staff/deleteForId/{ids}",CommonResult.class,ids);
     }
+
+
+
+    @GetMapping(value ="/login/{username}/{password}")
+    public CommonResult loginStaff(@PathVariable("username")String username,@PathVariable("password")String password){
+        return  template.postForEntity(USER_URL+"/userservice/staff/login/"+username+"/"+password,"",CommonResult.class).getBody();
+    }
+
+
 
 
 }

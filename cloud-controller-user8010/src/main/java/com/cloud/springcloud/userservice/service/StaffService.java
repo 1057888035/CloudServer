@@ -25,6 +25,8 @@ public interface StaffService extends IService<Staff> {
 
     CommonResult<Page<Staff>> getStaffForPhone(String phone);
 
+    String getPasswordForPhone(String phone);
+
     CommonResult updateForId(Staff staff);
 
     CommonResult deleteForId(int id);
