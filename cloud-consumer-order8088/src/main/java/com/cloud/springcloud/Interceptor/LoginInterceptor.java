@@ -4,7 +4,9 @@ package com.cloud.springcloud.Interceptor;
 
 import com.cloud.springcloud.entities.JwtUtils;
 import com.cloud.springcloud.userservice.service.StaffService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -19,6 +21,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Autowired
     StaffService staffService;
 
+    @Autowired
+    RedisTemplate redisTemplate;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 从 http 请求头中取出 token
@@ -27,7 +32,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         if(!(handler instanceof HandlerMethod)){
             return true;
         }
-        if (token != null){
+        if (token != null && redisTemplate.opsForValue().get(JwtUtils.getUserNameByToken(request)) !=null  ){
+            System.out.println(redisTemplate.opsForValue().get(JwtUtils.getUserNameByToken(request)));
             String username = JwtUtils.getUserNameByToken(request);
             String password = staffService.getPasswordForPhone(username);
             boolean result = JwtUtils.verify(token,username,password);

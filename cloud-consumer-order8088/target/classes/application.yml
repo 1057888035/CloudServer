@@ -10,7 +10,11 @@ spring:
     url: jdbc:mysql://47.93.234.153:3306/biyesheji?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: w.19971214
-
+  redis:
+    client-type: lettuce
+    host: r-bp18582dacd60694pd.redis.rds.aliyuncs.com
+    port: 6379
+    password: wangcheng:Wc123456
 
 
 eureka:

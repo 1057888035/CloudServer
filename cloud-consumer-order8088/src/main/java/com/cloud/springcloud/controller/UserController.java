@@ -124,13 +124,26 @@ public class UserController {
     }
 
 
-
+    /**
+     * 员工登录
+     * @param username
+     * @param password
+     * @return
+     */
     @GetMapping(value ="/login/{username}/{password}")
     public CommonResult loginStaff(@PathVariable("username")String username,@PathVariable("password")String password){
         return  template.postForEntity(USER_URL+"/userservice/staff/login/"+username+"/"+password,"",CommonResult.class).getBody();
     }
 
-
+    /**
+     * 员工退出
+     * @param username
+     * @return
+     */
+    @GetMapping(value ="/loginout/{username}")
+    public CommonResult loginStaff(@PathVariable("username")String username){
+        return  template.postForEntity(USER_URL+"/userservice/staff/loginout/"+username,"",CommonResult.class).getBody();
+    }
 
 
 }

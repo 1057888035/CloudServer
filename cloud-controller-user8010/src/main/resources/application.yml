@@ -11,7 +11,13 @@ spring:
     username: root
     password: w.19971214
 
-#mybatis:
+  redis:
+    client-type: lettuce
+    host: r-bp18582dacd60694pd.redis.rds.aliyuncs.com
+    port: 6379
+    password: wangcheng:Wc123456
+
+  #mybatis:
  # mapperLocations: classpath:mapper/*.xml
   #type-aliases-package: com.cloud.springcloud.entities
 

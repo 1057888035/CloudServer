@@ -8,12 +8,15 @@ import com.cloud.springcloud.entities.JwtUtils;
 import com.cloud.springcloud.entities.entity.Staff;
 import com.cloud.springcloud.userservice.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -30,6 +33,9 @@ public class StaffController {
     @Autowired(required = false)
     StaffService staffService;
 
+    @Autowired
+    RedisTemplate redisTemplate;
+
     /**
      * 员工登录
      * @return
@@ -43,11 +49,25 @@ public class StaffController {
         if (loginin != null &&loginin.getSType()==0) {
             String token = JwtUtils.sign(username,password);
             hashStaff.put("X-Token",token);
+            //将token存储到redis里
+            redisTemplate.opsForValue().set(username,token,30, TimeUnit.MINUTES);
+            System.out.println(redisTemplate.opsForValue().get(username));
             return new CommonResult(200, "登录成功",hashStaff);
         }
         return new CommonResult(400, "用户名或密码错误");
 
     }
+
+
+
+    @PostMapping(value = "/loginout/{username}", name = "员工登出")
+    public CommonResult loginout(@PathVariable("username")String username) {
+            redisTemplate.delete(username);
+        System.out.println(redisTemplate.opsForValue().get(username));
+            return new CommonResult(200, "成功");
+    }
+
+
 
     @PostMapping(value = "/save", name = "保存员工")
     public CommonResult save(@RequestBody Staff staff) {

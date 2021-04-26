@@ -9,6 +9,7 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+
   <modules>
     <module>cloud-provider-payment8001</module>
     <module>cloud-consumer-order8088</module>
@@ -26,6 +27,7 @@
 
   <!--统一管理jar包版本-->
   <properties>
+    <java.version>11</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>

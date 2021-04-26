@@ -10,6 +10,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="cloud-eureka-server7002" />
         <module name="cloud-api-commons" />
+        <module name="cloud-Interceptor-server6666" />
         <module name="cloud-eureka-server7001" />
         <module name="cloud-consumer-order8088" />
         <module name="cloud-provider-payment8001" />
@@ -20,6 +21,13 @@
         <module name="cloud-controller-config8014" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="11">
+      <module name="cloud-Interceptor-server6666" target="13.0.1" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cloud-api-commons" options="" />
+    </option>
   </component>
 </project>
