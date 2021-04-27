@@ -44,7 +44,7 @@ public class PropertyController {
      * @param building
      * @return
      */
-    @GetMapping("/pro/building/updateforid")
+    @GetMapping("/pro/building/Rupdateforid")
     public CommonResult updateBudforid(Building building){
         return template.postForEntity(PROPERTY_URL+"/userservice/building/updateforid",building,CommonResult.class).getBody();
     }

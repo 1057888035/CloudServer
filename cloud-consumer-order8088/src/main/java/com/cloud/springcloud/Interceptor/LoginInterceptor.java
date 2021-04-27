@@ -33,7 +33,6 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
         if (token != null && redisTemplate.opsForValue().get(JwtUtils.getUserNameByToken(request)) !=null  ){
-            System.out.println(redisTemplate.opsForValue().get(JwtUtils.getUserNameByToken(request)));
             String username = JwtUtils.getUserNameByToken(request);
             String password = staffService.getPasswordForPhone(username);
             boolean result = JwtUtils.verify(token,username,password);

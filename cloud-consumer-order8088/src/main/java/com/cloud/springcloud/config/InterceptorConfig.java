@@ -21,7 +21,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
         registry.addInterceptor(authenticationInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/login/**")
-                .excludePathPatterns("/loginout/**");
+                .excludePathPatterns("/loginout/**")
+                .excludePathPatterns("/vue-admin-template/user/**");
     }
     /**
      * @Author lsc
