@@ -48,7 +48,7 @@ public class StaffController {
         Staff loginin = staffService.loginin(username, password);
         if (loginin != null &&loginin.getSType()==0) {
             String token = JwtUtils.sign(username,password);
-            hashStaff.put("X-Token",token);
+            hashStaff.put("token",token);
             //将token存储到redis里
             redisTemplate.opsForValue().set(username,token,30, TimeUnit.MINUTES);
             System.out.println(redisTemplate.opsForValue().get(username));
@@ -60,12 +60,15 @@ public class StaffController {
 
 
 
+
     @PostMapping(value = "/loginout/{username}", name = "员工登出")
     public CommonResult loginout(@PathVariable("username")String username) {
             redisTemplate.delete(username);
         System.out.println(redisTemplate.opsForValue().get(username));
             return new CommonResult(200, "成功");
     }
+
+
 
 
 

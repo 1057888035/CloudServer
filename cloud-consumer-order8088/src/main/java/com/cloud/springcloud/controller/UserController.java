@@ -1,6 +1,7 @@
 package com.cloud.springcloud.controller;
 
 import com.cloud.springcloud.entities.CommonResult;
+import com.cloud.springcloud.entities.JwtUtils;
 import com.cloud.springcloud.entities.entity.Car;
 import com.cloud.springcloud.entities.entity.Owner;
 import com.cloud.springcloud.entities.entity.Staff;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.http.HttpRequest;
+import java.util.HashMap;
 
 
 @RestController
@@ -143,6 +147,17 @@ public class UserController {
     @GetMapping(value ="/loginout/{username}")
     public CommonResult loginStaff(@PathVariable("username")String username){
         return  template.postForEntity(USER_URL+"/userservice/staff/loginout/"+username,"",CommonResult.class).getBody();
+    }
+
+    @GetMapping(value = "/vue-admin-template/user/info", name = "员工登出")
+    public CommonResult info(HttpServletRequest request, String token) {
+        String userName = JwtUtils.getUserNameByToken(request);
+        HashMap<Object, Object> map = new HashMap<>();
+        map.put("roles","[\""+userName+"\"]");
+        map.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+        map.put("introduction","I am a super administrator");
+        map.put("name",userName);
+        return new CommonResult(200, "成功",map);
     }
 
 
