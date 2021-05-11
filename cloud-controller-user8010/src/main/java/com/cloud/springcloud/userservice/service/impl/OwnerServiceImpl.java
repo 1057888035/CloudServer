@@ -92,7 +92,7 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
     @Override
     public CommonResult<Page<Owner>> getOwnerForPhone(String phone) {
         QueryWrapper<Owner> wrapper = new QueryWrapper();
-        wrapper.eq("O_PHONE",phone);
+        wrapper.like("O_PHONE",phone);
 
         Page<Owner> page = new Page<>(1,10);
 

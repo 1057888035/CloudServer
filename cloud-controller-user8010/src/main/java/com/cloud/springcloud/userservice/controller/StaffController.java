@@ -7,15 +7,14 @@ import com.cloud.springcloud.entities.HashScripty;
 import com.cloud.springcloud.entities.JwtUtils;
 import com.cloud.springcloud.entities.entity.Staff;
 import com.cloud.springcloud.userservice.service.StaffService;
+import com.netflix.ribbon.proxy.annotation.Http;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -32,6 +31,8 @@ public class StaffController {
 
     @Autowired(required = false)
     StaffService staffService;
+
+
 
     @Autowired
     RedisTemplate redisTemplate;
@@ -53,18 +54,21 @@ public class StaffController {
             redisTemplate.opsForValue().set(username,token,30, TimeUnit.MINUTES);
             System.out.println(redisTemplate.opsForValue().get(username));
             return new CommonResult(200, "登录成功",hashStaff);
-        }
+        }else if (loginin ==null){
         return new CommonResult(400, "用户名或密码错误");
-
+        } else if (loginin.getSType() !=0){
+            return new CommonResult(400, "用户:"+username+"没有访问权限");
+        }
+        return new CommonResult(400, "登录出错");
     }
 
 
 
 
     @PostMapping(value = "/loginout/{username}", name = "员工登出")
-    public CommonResult loginout(@PathVariable("username")String username) {
+    public CommonResult loginout(@PathVariable("username") String token) {
+        String username = JwtUtils.getUserNameByTokenFromTk(token);
             redisTemplate.delete(username);
-        System.out.println(redisTemplate.opsForValue().get(username));
             return new CommonResult(200, "成功");
     }
 
@@ -74,6 +78,8 @@ public class StaffController {
 
     @PostMapping(value = "/save", name = "保存员工")
     public CommonResult save(@RequestBody Staff staff) {
+        staff.setSRegist(new Date());
+        staff.setSState(0);
         staff.setSPassword(HashScripty.SHA256(staff.getSPassword()));
         boolean b = staffService.save(staff);
         if (b) {
@@ -102,6 +108,9 @@ public class StaffController {
 
     @PostMapping(value = "/updateForId", name = "根据id修改员工")
     public CommonResult<Page<Staff>> updateForId(@RequestBody Staff staff) {
+        if (staff.getSPassword() !=null){
+            staff.setSPassword(HashScripty.SHA256(staff.getSPassword()));
+        }
         return staffService.updateForId(staff);
     }
 

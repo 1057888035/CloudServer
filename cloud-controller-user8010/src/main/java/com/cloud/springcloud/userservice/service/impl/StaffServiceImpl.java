@@ -66,7 +66,7 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
     @Override
     public CommonResult<Page<Staff>> getStaffForPhone(String phone) {
         QueryWrapper<Staff> wrapper = new QueryWrapper();
-        wrapper.eq("S_PHONE",phone);
+        wrapper.like("S_PHONE",phone);
 
         Page<Staff> page = new Page<>(1,10);
 

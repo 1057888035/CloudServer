@@ -15,7 +15,12 @@ spring:
     host: r-bp18582dacd60694pd.redis.rds.aliyuncs.com
     port: 6379
     password: wangcheng:Wc123456
-
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+  # 以下设置可以将Date类型自动转换为如下格式的日期，指定Jackson格式化日期使用的时区，Jackson默认使用UTC
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
 eureka:
   client:

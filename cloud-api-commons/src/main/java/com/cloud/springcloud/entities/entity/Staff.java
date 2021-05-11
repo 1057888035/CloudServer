@@ -6,10 +6,13 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 
 /**
  * <p>
@@ -43,14 +46,17 @@ public class Staff implements Serializable {
     @TableField("S_NAME")
     private String sName;
 
+
     @ApiModelProperty(value = "出生日期")
     @TableField("S_BIRTHDAY")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date sBirthday;
 
     @ApiModelProperty(value = "入职日期")
     @TableField("S_REGIST")
     private Date sRegist;
 
+    @ApiModelProperty(value = "离职日期")
     @TableField("S_RESOGM")
     private Date sResogm;
 

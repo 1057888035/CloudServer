@@ -2,7 +2,10 @@ package com.cloud.springcloud.Interceptor;
 
 
 
+import cn.hutool.json.JSONObject;
+import com.cloud.springcloud.entities.CommonResult;
 import com.cloud.springcloud.entities.JwtUtils;
+import com.cloud.springcloud.entities.entity.Staff;
 import com.cloud.springcloud.userservice.service.StaffService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+
 
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
@@ -36,11 +41,21 @@ public class LoginInterceptor implements HandlerInterceptor {
             String username = JwtUtils.getUserNameByToken(request);
             String password = staffService.getPasswordForPhone(username);
             boolean result = JwtUtils.verify(token,username,password);
-            if(result){
-                System.out.println("通过拦截器");
-                return true;
+            Staff staff = staffService.loginin(username, password);
+            if(result && staff.getSType()==0){
+              return true;
             }
         }
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json; charset=utf-8");
+        PrintWriter out = null;
+        JSONObject res = new JSONObject();
+        res.put("code",50008);
+        res.put("success", false);
+        res.put("message", "登录状态已经失效，请重新登录");
+        out = response.getWriter();
+        out.append(res.toString());
+
         return false;
     }
 

@@ -1,19 +1,22 @@
 package com.cloud.springcloud.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloud.springcloud.entities.CommonResult;
 import com.cloud.springcloud.entities.JwtUtils;
 import com.cloud.springcloud.entities.entity.Car;
 import com.cloud.springcloud.entities.entity.Owner;
 import com.cloud.springcloud.entities.entity.Staff;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.http.HttpRequest;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -24,6 +27,9 @@ public class UserController {
 
     @Autowired
     private RestTemplate template;
+
+    @Autowired
+    RedisTemplate redisTemplate;
 
 
     /**
@@ -92,12 +98,25 @@ public class UserController {
 
 
     /**
+     * 根据手机号查询业主
+     */
+    @GetMapping(value = "/getOwnerForPhone/{phone}", name = "根据手机号查询业主")
+    public CommonResult<Page<Owner>> getOwnerForId(@PathVariable("phone") String phone) {
+        return  template.getForObject(USER_URL+"/userservice/owner/getOwnerForPhone//"+phone,CommonResult.class);
+    }
+
+
+    /**
      * 保存员工
      * @param staff
      * @return
      */
     @GetMapping(value = "/user/staff/save")
-    public CommonResult saveStaff(Staff staff){
+    public CommonResult saveStaff(Staff staff,String date) throws Exception{
+        date = date.replace("Z", " UTC");//是空格+UTC
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS Z");//格式化的表达式
+        Date d = format.parse(date );
+        staff.setSBirthday(d);
         return  template.postForEntity(USER_URL+"/userservice/staff/save",staff,CommonResult.class).getBody();
     }
 
@@ -112,6 +131,19 @@ public class UserController {
         return  template.getForObject(USER_URL+"/userservice/staff/getAllStaff/{pn}",CommonResult.class,pn);
     }
 
+    /**
+     * 获取部门
+     */
+    @GetMapping(value = "/user/dp/getAllDp")
+    public CommonResult getAllStaff(){
+        return  template.getForObject(USER_URL+"/userservice/department/getAllDp",CommonResult.class);
+    }
+
+    /**
+     * 跟新员工信息
+     * @param staff
+     * @return
+     */
     @GetMapping(value = "/user/staff/updateForId")
     public CommonResult updateStaffForId(Staff staff){
         return  template.postForEntity(USER_URL+"/userservice/staff/updateForId",staff,CommonResult.class).getBody();
@@ -149,15 +181,24 @@ public class UserController {
         return  template.postForEntity(USER_URL+"/userservice/staff/loginout/"+username,"",CommonResult.class).getBody();
     }
 
-    @GetMapping(value = "/vue-admin-template/user/info", name = "员工登出")
+    @GetMapping(value = "/vue-admin-template/user/info", name = "员工信息")
     public CommonResult info(HttpServletRequest request, String token) {
         String userName = JwtUtils.getUserNameByToken(request);
         HashMap<Object, Object> map = new HashMap<>();
-        map.put("roles","[\""+userName+"\"]");
-        map.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
-        map.put("introduction","I am a super administrator");
-        map.put("name",userName);
-        return new CommonResult(200, "成功",map);
+        if (  redisTemplate.opsForValue().get(userName) !=null){
+            map.put("roles","[\""+userName+"\"]");
+            map.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+            map.put("introduction","I am a super administrator");
+            map.put("name",userName);
+            return new CommonResult(200, "成功",map);
+        }
+        return new CommonResult(401,"未登录");
+    }
+
+    @GetMapping(value = "/getStaffForPhone/{phone}", name = "根据手机号查询员工")
+    public CommonResult<Page<Staff>> getStaffForPhone(@PathVariable("phone") String phone) {
+        return  template.getForObject(USER_URL+"/userservice/staff/getStaffForPhone/"+phone,CommonResult.class);
+
     }
 
 
