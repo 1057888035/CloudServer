@@ -1,7 +1,9 @@
 # CloudServer
 王程毕业设计：基于web的社区物业管理系统 使用SpringCloud实现
 
-cloud-consumer-order8088    服务转发服务。cloud-api-commons
+cloud-consumer-order8088    服务转发服务
+
+cloud-api-commons  工具包
 
 cloud-controller-charge8012   收费管理模块
 
