@@ -45,17 +45,17 @@ public class LoginInterceptor implements HandlerInterceptor {
             if(result && staff.getSType()==0){
               return true;
             }
+        }else if(request.getServletPath() !="/error"){
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/json; charset=utf-8");
+            PrintWriter out = null;
+            JSONObject res = new JSONObject();
+            res.put("code", 50008);
+            res.put("success", false);
+            res.put("message", "请携带登录信息");
+            out = response.getWriter();
+            out.append(res.toString());
         }
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json; charset=utf-8");
-        PrintWriter out = null;
-        JSONObject res = new JSONObject();
-        res.put("code",50008);
-        res.put("success", false);
-        res.put("message", "登录状态已经失效，请重新登录");
-        out = response.getWriter();
-        out.append(res.toString());
-
         return false;
     }
 

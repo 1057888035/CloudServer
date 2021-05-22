@@ -53,6 +53,11 @@ public class UserController {
         return  template.getForObject(USER_URL+"/userservice/car/deleteForId/{ids}",CommonResult.class,ids);
     }
 
+    @GetMapping(value = "/user/car/getAllCar/{pn}")
+    public CommonResult deleteCarForId(@PathVariable("pn")Integer pn){
+        return  template.getForObject(USER_URL+"/userservice/car/getAllCar/{pn}",CommonResult.class,pn);
+    }
+
 
 
 

@@ -52,7 +52,7 @@ public class BuildingServiceImpl extends ServiceImpl<BuildingMapper, Building> i
     @Override
     public CommonResult<Page<Building>> getBuildingForCode(Integer code) {
         QueryWrapper<Building> wrapper = new QueryWrapper();
-        wrapper.eq("B_CODE",code);
+        wrapper.like("B_CODE",code);
 
         Page<Building> page = new Page<>(1,10);
 

@@ -5,12 +5,12 @@ import com.cloud.springcloud.entities.entity.Building;
 import com.cloud.springcloud.entities.entity.Parking;
 import com.cloud.springcloud.entities.entity.Transfer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class PropertyController {
@@ -29,6 +29,13 @@ public class PropertyController {
         return template.getForObject(PROPERTY_URL+"/userservice/building/getBuilding/{pn}",CommonResult.class,pn);
     }
 
+    @PostMapping("/pro/building/import")
+    public CommonResult importAlarmEvents(HttpServletRequest request,@RequestParam MultipartFile file){
+        System.out.println(file.toString());
+        return template.postForEntity(PROPERTY_URL+"/userservice/building/project/import",request,CommonResult.class,file).getBody();
+
+    }
+
     /**
      * 新增房间
      * @param building
@@ -44,10 +51,21 @@ public class PropertyController {
      * @param building
      * @return
      */
-    @GetMapping("/pro/building/Rupdateforid")
+    @GetMapping("/pro/building/updateforid")
     public CommonResult updateBudforid(Building building){
         return template.postForEntity(PROPERTY_URL+"/userservice/building/updateforid",building,CommonResult.class).getBody();
     }
+
+    /**
+     * 根据code查
+     * @param code
+     * @return
+     */
+    @GetMapping("/pro/building/getBuildingForCode/{code}")
+    public CommonResult getBuildingForCode(@PathVariable("code") Integer code){
+        return template.getForObject(PROPERTY_URL+"/userservice/building/getBuildingForCode/{code}",CommonResult.class,code);
+    }
+
 
 
     /**
@@ -57,7 +75,7 @@ public class PropertyController {
      */
     @GetMapping("/pro/building/deleteForId/{ids}")
     public CommonResult deleteBudForId(@PathVariable("ids")String ids){
-        return template.getForObject(PROPERTY_URL+"/userservice/instock",CommonResult.class,ids);
+        return template.getForObject(PROPERTY_URL+"/deleteForId/{ids}",CommonResult.class,ids);
     }
 
 
