@@ -22,4 +22,5 @@ cloud-provider-payment8001   支付功能模块
 
 
 运行方法：
-  首先运行cloud-eureka-server7001 ===>cloud-eureka-server7002====>cloud-provider-payment8001====>cloud-controller-user8010====>cloud-controller-property8011====>cloud-controller-charge8012====>cloud-controller-service8013====>cloud-controller-config8014====>cloud-consumer-order8088
+
+cloud-eureka-server7001 ===>cloud-eureka-server7002====>cloud-provider-payment8001====>cloud-controller-user8010====>cloud-controller-property8011====>cloud-controller-charge8012====>cloud-controller-service8013====>cloud-controller-config8014====>cloud-consumer-order8088
