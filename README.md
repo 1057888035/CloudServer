@@ -1,5 +1,5 @@
 # CloudServer
-王程毕业设计：基于web的社区物业管理系统 使用SpringCloud实现
+基于springcloud的开源项目：社区物业管理系统
 
 cloud-consumer-order8088    服务转发服务
 
